@@ -1,3 +1,4 @@
+from typing import List
 from numpy.typing import ArrayLike
 
 Float1D = ArrayLike
@@ -35,6 +36,9 @@ Char2D = ArrayLike
 Char3D = ArrayLike
 Char4D = ArrayLike
 
+String = str
+String1D = List[str]
+
 double = float
 long = int
 short = int
@@ -46,3 +50,10 @@ OutputStream = str
 FileInputStream = str
 FileOutputStream = str
 File = str
+Buffer = str
+IntBuffer = str
+FloatBuffer = str
+ByteBuffer = str
+DoubleBuffer = str
+ShortBuffer = str
+LongBuffer = str

@@ -1,13 +1,11 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
-from java.nio import ByteOrder
+from java.nio import *
 
 
 class ArrayInputStream:
     """
     An input stream that implements {@link ArrayInput}.
-    @author Dave Hale, Colorado School of Mines
-    @version 2006.08.05
     """
 
     @overload
@@ -17,9 +15,9 @@ class ArrayInputStream:
         The default byte order is BIG_ENDIAN.
         
         Parameters
-        ----------
-        ist : InputStream
-            The description of InputStream.
+        -----------
+        is : InputStream
+            the input stream.
         """
 
     @overload
@@ -29,21 +27,21 @@ class ArrayInputStream:
         The default byte order is BIG_ENDIAN.
         
         Parameters
-        ----------
+        -----------
         fis : FileInputStream
-            The description of FileInputStream.
+            the file input stream.
         """
 
     @overload
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: String) -> None:
         """
         Constructs an array input stream for the specified file name.
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
         -----------
-        name : str
-            the file name
+        name : String
+            the file name.
         """
 
     @overload
@@ -51,11 +49,11 @@ class ArrayInputStream:
         """
         Constructs an array input stream for the specified file.
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
         -----------
         file : File
-            The file
+            the file.
         """
 
     @overload
@@ -64,47 +62,41 @@ class ArrayInputStream:
         Constructs an array input stream for the specified stream and byte order.
         
         Parameters
-        ----------
+        -----------
         is : InputStream
             the input stream.
         bo : ByteOrder
-            The description of ByteOrder.
+            the byte order.
         """
 
     @overload
-    def __init__(self, name: str, bo: ByteOrder) -> None:
+    def __init__(self, name: String, bo: ByteOrder) -> None:
         """
         Constructs an array input stream for the specified file name
         and byte order.
-
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
-        ----------
-        name : str
+        -----------
+        name : String
             the file name.
         bo : ByteOrder
-            The description of ByteOrder.
+            the byte order.
         """
 
     @overload
     def __init__(self, file: File, bo: ByteOrder) -> None:
         """
-        Constructs an array input stream for the specified file name
-        and byte order.
-
+        Constructs an array input stream for the specified file and byte order.
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
-        ----------
+        -----------
         file : File
-            the file
+            the file.
         bo : ByteOrder
-            The description of ByteOrder.
+            the byte order.
         """
-
-    def flush(self) -> None:
-        ...
 
     def close(self) -> None:
         """
@@ -114,11 +106,87 @@ class ArrayInputStream:
     def getByteOrder(self) -> ByteOrder:
         """
         Gets the byte order for this stream.
-        
         Returns
-        ----------
-        bo : ByteOrder
+        --------
+        output : ByteOrder
             the byte order.
+        """
+
+    @overload
+    def readFully(self, b: Byte1D) -> None:
+        """
+    
+        """
+
+    @overload
+    def readFully(self, b: Byte1D, off: int, len: int) -> None:
+        """
+    
+        """
+
+    def skipBytes(self, n: int) -> int:
+        """
+    
+        """
+
+    def readBoolean(self) -> bool:
+        """
+    
+        """
+
+    def readByte(self) -> byte:
+        """
+    
+        """
+
+    def readUnsignedByte(self) -> int:
+        """
+    
+        """
+
+    def readShort(self) -> short:
+        """
+    
+        """
+
+    def readUnsignedShort(self) -> int:
+        """
+    
+        """
+
+    def readChar(self) -> char:
+        """
+    
+        """
+
+    def readInt(self) -> int:
+        """
+    
+        """
+
+    def readLong(self) -> long:
+        """
+    
+        """
+
+    def readFloat(self) -> float:
+        """
+    
+        """
+
+    def readDouble(self) -> double:
+        """
+    
+        """
+
+    def readLine(self) -> String:
+        """
+    
+        """
+
+    def readUTF(self) -> String:
+        """
+    
         """
 
     @overload
@@ -127,13 +195,13 @@ class ArrayInputStream:
         Reads byte elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Byte1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -143,9 +211,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Byte1D
-            The description of Byte1D.
+            the array.
         """
 
     @overload
@@ -155,9 +223,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Byte2D
-            The description of Byte2D.
+            the array.
         """
 
     @overload
@@ -167,9 +235,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Byte3D
-            The description of Byte3D.
+            the array.
         """
 
     @overload
@@ -178,13 +246,13 @@ class ArrayInputStream:
         Reads char elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Char1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -194,9 +262,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Char1D
-            The description of Char1D.
+            the array.
         """
 
     @overload
@@ -206,9 +274,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Char2D
-            The description of Char2D.
+            the array.
         """
 
     @overload
@@ -218,9 +286,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Char3D
-            The description of Char3D.
+            the array.
         """
 
     @overload
@@ -229,13 +297,13 @@ class ArrayInputStream:
         Reads short elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Short1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -245,9 +313,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Short1D
-            The description of Short1D.
+            the array.
         """
 
     @overload
@@ -257,9 +325,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Short2D
-            The description of Short2D.
+            the array.
         """
 
     @overload
@@ -269,9 +337,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Short3D
-            The description of Short3D.
+            the array.
         """
 
     @overload
@@ -280,13 +348,13 @@ class ArrayInputStream:
         Reads int elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Int1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -296,9 +364,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Int1D
-            The description of Int1D.
+            the array.
         """
 
     @overload
@@ -308,9 +376,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Int2D
-            The description of Int2D.
+            the array.
         """
 
     @overload
@@ -320,9 +388,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Int3D
-            The description of Int3D.
+            the array.
         """
 
     @overload
@@ -331,13 +399,13 @@ class ArrayInputStream:
         Reads long elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Long1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -347,9 +415,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Long1D
-            The description of Long1D.
+            the array.
         """
 
     @overload
@@ -359,9 +427,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Long2D
-            The description of Long2D.
+            the array.
         """
 
     @overload
@@ -371,9 +439,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Long3D
-            The description of Long3D.
+            the array.
         """
 
     @overload
@@ -382,13 +450,13 @@ class ArrayInputStream:
         Reads float elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Float1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -398,9 +466,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Float1D
-            The description of Float1D.
+            the array.
         """
 
     @overload
@@ -410,9 +478,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Float2D
-            The description of Float2D.
+            the array.
         """
 
     @overload
@@ -422,9 +490,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Float3D
-            The description of Float3D.
+            the array.
         """
 
     @overload
@@ -433,13 +501,13 @@ class ArrayInputStream:
         Reads double elements into a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Double1D
             the array.
         k : int
             the index of the first element to read.
         n : int
-            The description of int.
+            the number of elements to read.
         """
 
     @overload
@@ -449,9 +517,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Double1D
-            The description of Double1D.
+            the array.
         """
 
     @overload
@@ -461,9 +529,9 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Double2D
-            The description of Double2D.
+            the array.
         """
 
     @overload
@@ -473,7 +541,7 @@ class ArrayInputStream:
         The array length equals the number of elements to read.
         
         Parameters
-        ----------
+        -----------
         v : Double3D
-            The description of Double3D.
+            the array.
         """

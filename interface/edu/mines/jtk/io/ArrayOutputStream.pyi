@@ -1,13 +1,11 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
-from java.nio import ByteOrder
+from java.nio import *
 
 
 class ArrayOutputStream:
     """
     An output stream that implements {@link ArrayOutput}.
-    @author Dave Hale, Colorado School of Mines
-    @version 2006.08.05
     """
 
     @overload
@@ -17,9 +15,9 @@ class ArrayOutputStream:
         The default byte order is BIG_ENDIAN.
         
         Parameters
-        ----------
+        -----------
         os : OutputStream
-            The description of OutputStream.
+            the output stream.
         """
 
     @overload
@@ -29,21 +27,21 @@ class ArrayOutputStream:
         The default byte order is BIG_ENDIAN.
         
         Parameters
-        ----------
+        -----------
         fos : FileOutputStream
-            The description of FileOutputStream.
+            the file output stream.
         """
 
     @overload
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: String) -> None:
         """
         Constructs an array output stream for the specified file name.
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
         -----------
-        name : str
-            the file name
+        name : String
+            the file name.
         """
 
     @overload
@@ -51,11 +49,11 @@ class ArrayOutputStream:
         """
         Constructs an array output stream for the specified file.
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
         -----------
         file : File
-            The file
+            the file.
         """
 
     @overload
@@ -64,43 +62,45 @@ class ArrayOutputStream:
         Constructs an array output stream for the specified stream and byte order.
         
         Parameters
-        ----------
+        -----------
         os : OutputStream
             the output stream.
         bo : ByteOrder
-            The description of ByteOrder.
+            the byte order.
         """
 
     @overload
-    def __init__(self, name: str, bo: ByteOrder) -> None:
+    def __init__(self, name: String, bo: ByteOrder) -> None:
         """
         Constructs an array output stream for the specified file name
         and byte order.
-
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
-        ----------
-        name : str
+        -----------
+        name : String
             the file name.
         bo : ByteOrder
-            The description of ByteOrder.
+            the byte order.
         """
 
     @overload
     def __init__(self, file: File, bo: ByteOrder) -> None:
         """
-        Constructs an array output stream for the specified file name
-        and byte order.
-
+        Constructs an array output stream for the specified file and byte order.
         The default byte order is BIG_ENDIAN.
-
+        
         Parameters
-        ----------
+        -----------
         file : File
-            the file
+            the file.
         bo : ByteOrder
-            The description of ByteOrder.
+            the byte order.
+        """
+
+    def flush(self) -> None:
+        """
+    
         """
 
     def close(self) -> None:
@@ -111,14 +111,85 @@ class ArrayOutputStream:
     def getByteOrder(self) -> ByteOrder:
         """
         Gets the byte order for this stream.
-        
-        Parameters
-        ----------
-        
         Returns
-        -------
+        --------
         output : ByteOrder
             the byte order.
+        """
+
+    @overload
+    def write(self, b: int) -> None:
+        """
+    
+        """
+
+    @overload
+    def write(self, b: Byte1D) -> None:
+        """
+    
+        """
+
+    @overload
+    def write(self, b: Byte1D, off: int, len: int) -> None:
+        """
+    
+        """
+
+    def writeBoolean(self, v: bool) -> None:
+        """
+    
+        """
+
+    def writeByte(self, v: int) -> None:
+        """
+    
+        """
+
+    def writeShort(self, v: int) -> None:
+        """
+    
+        """
+
+    def writeChar(self, v: int) -> None:
+        """
+    
+        """
+
+    def writeInt(self, v: int) -> None:
+        """
+    
+        """
+
+    def writeLong(self, v: long) -> None:
+        """
+    
+        """
+
+    def writeFloat(self, v: float) -> None:
+        """
+    
+        """
+
+    def writeDouble(self, v: double) -> None:
+        """
+    
+        """
+
+    @overload
+    def writeBytes(self, s: String) -> None:
+        """
+    
+        """
+
+    @overload
+    def writeChars(self, s: String) -> None:
+        """
+    
+        """
+
+    def writeUTF(self, s: String) -> None:
+        """
+    
         """
 
     @overload
@@ -127,13 +198,13 @@ class ArrayOutputStream:
         Writes byte elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Byte1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -143,9 +214,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Byte1D
-            The description of Byte1D.
+            the array.
         """
 
     @overload
@@ -154,9 +225,9 @@ class ArrayOutputStream:
         Writes byte elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Byte2D
-            The description of Byte2D.
+            the array.
         """
 
     @overload
@@ -165,9 +236,9 @@ class ArrayOutputStream:
         Writes byte elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Byte3D
-            The description of Byte3D.
+            the array.
         """
 
     @overload
@@ -176,13 +247,13 @@ class ArrayOutputStream:
         Writes char elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Char1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -192,9 +263,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Char1D
-            The description of Char1D.
+            the array.
         """
 
     @overload
@@ -203,9 +274,9 @@ class ArrayOutputStream:
         Writes char elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Char2D
-            The description of Char2D.
+            the array.
         """
 
     @overload
@@ -214,9 +285,9 @@ class ArrayOutputStream:
         Writes char elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Char3D
-            The description of Char3D.
+            the array.
         """
 
     @overload
@@ -225,13 +296,13 @@ class ArrayOutputStream:
         Writes short elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Short1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -241,9 +312,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Short1D
-            The description of Short1D.
+            the array.
         """
 
     @overload
@@ -252,9 +323,9 @@ class ArrayOutputStream:
         Writes short elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Short2D
-            The description of Short2D.
+            the array.
         """
 
     @overload
@@ -263,9 +334,9 @@ class ArrayOutputStream:
         Writes short elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Short3D
-            The description of Short3D.
+            the array.
         """
 
     @overload
@@ -274,13 +345,13 @@ class ArrayOutputStream:
         Writes int elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Int1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -290,9 +361,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Int1D
-            The description of Int1D.
+            the array.
         """
 
     @overload
@@ -301,9 +372,9 @@ class ArrayOutputStream:
         Writes int elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Int2D
-            The description of Int2D.
+            the array.
         """
 
     @overload
@@ -312,9 +383,9 @@ class ArrayOutputStream:
         Writes int elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Int3D
-            The description of Int3D.
+            the array.
         """
 
     @overload
@@ -323,13 +394,13 @@ class ArrayOutputStream:
         Writes long elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Long1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -339,9 +410,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Long1D
-            The description of Long1D.
+            the array.
         """
 
     @overload
@@ -350,9 +421,9 @@ class ArrayOutputStream:
         Writes long elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Long2D
-            The description of Long2D.
+            the array.
         """
 
     @overload
@@ -361,9 +432,9 @@ class ArrayOutputStream:
         Writes long elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Long3D
-            The description of Long3D.
+            the array.
         """
 
     @overload
@@ -372,13 +443,13 @@ class ArrayOutputStream:
         Writes float elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Float1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -388,9 +459,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Float1D
-            The description of Float1D.
+            the array.
         """
 
     @overload
@@ -399,9 +470,9 @@ class ArrayOutputStream:
         Writes float elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Float2D
-            The description of Float2D.
+            the array.
         """
 
     @overload
@@ -410,9 +481,9 @@ class ArrayOutputStream:
         Writes float elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Float3D
-            The description of Float3D.
+            the array.
         """
 
     @overload
@@ -421,13 +492,13 @@ class ArrayOutputStream:
         Writes double elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Double1D
             the array.
         k : int
             the index of the first element to write.
         n : int
-            The description of int.
+            the number of elements to write.
         """
 
     @overload
@@ -437,9 +508,9 @@ class ArrayOutputStream:
         The array length equals the number of elements to write.
         
         Parameters
-        ----------
+        -----------
         v : Double1D
-            The description of Double1D.
+            the array.
         """
 
     @overload
@@ -448,9 +519,9 @@ class ArrayOutputStream:
         Writes double elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Double2D
-            The description of Double2D.
+            the array.
         """
 
     @overload
@@ -459,7 +530,7 @@ class ArrayOutputStream:
         Writes double elements from a specified array.
         
         Parameters
-        ----------
+        -----------
         v : Double3D
-            The description of Double3D.
+            the array.
         """
