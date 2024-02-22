@@ -1,7 +1,7 @@
-from typing import overload
+from typing import overload, List
 from edu.mines.jtk.mapping import *
 
-from edu.mines.jtk.dsp import *
+from edu.mines.jtk.dsp import Cdouble
 
 
 class RecursiveCascadeFilter:
@@ -20,7 +20,7 @@ class RecursiveCascadeFilter:
     """
 
     @overload
-    def __init__(self, poles: Cdouble1D, zeros: Cdouble1D,
+    def __init__(self, poles: List[Cdouble], zeros: List[Cdouble],
                  gain: double) -> None:
         """
         Constructs a recursive filter with specified poles, zeros, and gain.
@@ -29,9 +29,9 @@ class RecursiveCascadeFilter:
         
         Parameters
         -----------
-        poles : Cdouble1D
+        poles : List[Cdouble]
             array of complex poles.
-        zeros : Cdouble1D
+        zeros : List[Cdouble]
             array of complex poles.
         gain : double
             the filter gain.

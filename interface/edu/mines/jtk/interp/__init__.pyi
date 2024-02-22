@@ -1,3 +1,9 @@
+"""
+Interpolation and gridding of scattered (irregularly sampled) data.
+
+Source: https://github.com/MinesJTK/jtk/tree/master/core/src/main/java/edu/mines/jtk/interp
+"""
+
 from .TimeMarker3X import *
 from .RadialInterpolator2 import *
 from .TimeHeap3 import *

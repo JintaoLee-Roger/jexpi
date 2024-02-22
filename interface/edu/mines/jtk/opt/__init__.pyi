@@ -1,3 +1,9 @@
+"""
+Code for Gauss-Newton and conjugate-gradient inversion and optimization.
+
+Source: https://github.com/MinesJTK/jtk/tree/master/core/src/main/java/edu/mines/jtk/opt
+"""
+
 from .ScalarVect import *
 from .Transform import *
 from .ArrayVect1 import *

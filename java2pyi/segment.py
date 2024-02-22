@@ -39,13 +39,13 @@ if __name__ == '__main__':
 
     subd = 'awt'
     names = list((root / subd).rglob("*.java"))
-    # names = [root / subd / 'ArrayMath.java']
+    names = [root / subd / 'ColorMapped.java']
 
-    with open(f'interface/edu/mines/jtk/{subd}/__init__.pyi', 'w') as f:
-        for name in names:
-            f.write(f'from .{name.stem} import *\n')
+    # with open(f'interface/edu/mines/jtk/{subd}/__init__.pyi', 'w') as f:
+    #     for name in names:
+    #         f.write(f'from .{name.stem} import *\n')
 
-    exit()
+    # exit()
     for name in names:
 
         javafile = name
@@ -103,8 +103,8 @@ if __name__ == '__main__':
                     pt = [typemap(t) for t in pt]
                     rt = [typemap(t) for t in rt]
 
-                    # is_static = False
-                    # use_self = False
+                    is_static = False
+                    use_self = False
 
                     fst = format_method(method.name, params, pt, rt,
                                         method.documentation, is_overload,

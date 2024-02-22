@@ -162,3 +162,16 @@ def get_custom_cmap(cmap):
                 b[i] = bseg[j] + (bseg[j + 1] - bseg[j]) * y
 
     return ColorMap(0.0, 1.0, r, g, b).getColorModel()
+
+
+
+################ Filter Noise #############
+
+def filter_noise(gx, level):
+    gs = zerofloat(gx)
+    lof = LocalOrientFilter(4, 1)
+    ets = lof.applyForTensors(gx)
+    lsf = LocalSmoothingFilter()
+    lsf.apply(ets, level, gx, gs)
+
+    return sub(gx, gs)

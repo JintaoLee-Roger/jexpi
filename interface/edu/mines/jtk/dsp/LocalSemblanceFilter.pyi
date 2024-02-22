@@ -1,6 +1,6 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
-from edu.mines.jtk.dsp import *
+from edu.mines.jtk.dsp import EigenTensors3, EigenTensors2
 
 
 class LocalSemblanceFilter:

@@ -1,5 +1,5 @@
 
-from typing import overload
+from typing import overload, List
 from edu.mines.jtk.mapping import *
 
 
@@ -101,7 +101,7 @@ class Parameter:
             parameter value.
         """
     @overload
-    def __init__(self, name: String, values: boolean[]) -> None:
+    def __init__(self, name: String, values: List[bool]) -> None:
         """
         Construct a named parameter with boolean values.
         
@@ -109,7 +109,7 @@ class Parameter:
         -----------
         name : String
             parameter name.
-        values : boolean[]
+        values : List[bool]
             parameter values.
         """
     @overload
@@ -257,7 +257,7 @@ class Parameter:
             parameter units.
         """
     @overload
-    def __init__(self, name: String, values: boolean[], units: String) -> None:
+    def __init__(self, name: String, values: List[bool], units: String) -> None:
         """
         Construct a named parameter with boolean values and units.
         
@@ -265,7 +265,7 @@ class Parameter:
         -----------
         name : String
             parameter name.
-        values : boolean[]
+        values : List[bool]
             parameter values.
         units : String
             parameter units.
@@ -576,13 +576,13 @@ class Parameter:
         output : String
             parameter value.
         """
-    def getBooleans(self) -> boolean[]:
+    def getBooleans(self) -> List[bool]:
         """
         Get parameter values as array of booleans.
         cannot be converted to boolean.
         Returns
         --------
-        output : boolean[]
+        output : List[bool]
             parameter values.
         """
     def getInts(self) -> Int1D:
@@ -684,13 +684,13 @@ class Parameter:
         value : String
             parameter value.
         """
-    def setBooleans(self, values: boolean[]) -> None:
+    def setBooleans(self, values: List[bool]) -> None:
         """
         Set parameter values as an array of booleans.
         
         Parameters
         -----------
-        values : boolean[]
+        values : List[bool]
             parameter values.
         """
     def setInts(self, values: Int1D) -> None:

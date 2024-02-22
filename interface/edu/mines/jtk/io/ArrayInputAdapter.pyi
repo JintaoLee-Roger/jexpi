@@ -2,6 +2,7 @@ from typing import overload
 from edu.mines.jtk.mapping import *
 from java.nio import *
 
+
 class ArrayInputAdapter:
     """
     Implements {@link ArrayInput} by wrapping {@link java.io.DataInput}.

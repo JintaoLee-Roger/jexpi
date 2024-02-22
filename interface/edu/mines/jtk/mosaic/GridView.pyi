@@ -1,5 +1,6 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.mosaic import *
 
 
 class GridView:

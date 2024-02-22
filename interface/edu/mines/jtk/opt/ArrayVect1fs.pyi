@@ -1,5 +1,6 @@
-from typing import overload
+from typing import overload, List
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.opt import *
 
 
 class ArrayVect1fs:
@@ -8,7 +9,7 @@ class ArrayVect1fs:
     """
 
     @overload
-    def __init__(self, data: ArrayVect1f1D) -> None:
+    def __init__(self, data: List[ArrayVect1f]) -> None:
         """
         Wrap an array of ArrayVect1f's
         """
@@ -24,7 +25,7 @@ class ArrayVect1fs:
         Return the size of the embedded array
         """
 
-    def getData(self) -> ArrayVect1f1D:
+    def getData(self) -> List[ArrayVect1f]:
         """
         Get the embedded data
         """

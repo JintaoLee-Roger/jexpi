@@ -1,3 +1,9 @@
+"""
+Generally useful utilities.
+
+Source: https://github.com/MinesJTK/jtk/tree/master/core/src/main/java/edu/mines/jtk/util
+"""
+
 from .PartialMonitor import *
 from .FloatByteMap import *
 from .Cfloat import *

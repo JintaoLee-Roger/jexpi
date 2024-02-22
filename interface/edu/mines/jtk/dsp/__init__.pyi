@@ -1,3 +1,9 @@
+"""
+Digital signal processing.
+
+Source: https://github.com/MinesJTK/jtk/tree/master/core/src/main/java/edu/mines/jtk/dsp
+"""
+
 from .SincInterp import *
 from .HilbertTransformFilter import *
 from .WarpFunction2 import *

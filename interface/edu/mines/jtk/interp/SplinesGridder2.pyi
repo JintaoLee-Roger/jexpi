@@ -1,5 +1,7 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.interp import *
+from edu.mines.jtk.dsp import *
 
 
 class SplinesGridder2:
@@ -172,7 +174,7 @@ class SplinesGridder2:
         """
 
     @overload
-    def gridMissing(self, m: boolean2D, q: Float2D) -> None:
+    def gridMissing(self, m: Bool2D, q: Float2D) -> None:
         """
         Computes gridded values that are missing in the specified array.
         Missing values are those with missing-value flags set to true.

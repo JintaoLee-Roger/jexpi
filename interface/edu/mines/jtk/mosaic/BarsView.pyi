@@ -1,5 +1,8 @@
 from typing import overload
+from java.awt import *
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.mosaic import *
+from edu.mines.jtk.dsp import *
 
 
 class BarsView:

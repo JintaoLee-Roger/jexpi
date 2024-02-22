@@ -5,7 +5,6 @@
 *.segy
 *.las 
 *.dev 
-*.png 
 *.pdf
 *test*
 example.*

@@ -1,3 +1,9 @@
+"""
+A system for 2-D graphics.
+
+Source: https://github.com/MinesJTK/jtk/tree/master/core/src/main/java/edu/mines/jtk/mosaic
+"""
+
 from .Projector import *
 from .SimplePlot import *
 from .Mosaic import *

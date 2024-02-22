@@ -1,5 +1,4 @@
-
-from typing import overload
+from typing import overload, List
 from edu.mines.jtk.mapping import *
 
 
@@ -17,9 +16,10 @@ class Threads:
         output : int
             the number of available processors (cores).
         """
+
     @overload
     @staticmethod
-    def makeArray(self) -> Thread[]:
+    def makeArray(self) -> List[Thread]:
         """
         Returns a new array for threads. The length of the array equals the
         number of available processors (or cores).
@@ -27,12 +27,13 @@ class Threads:
         Note that this method does not actually construct any threads.
         Returns
         --------
-        output : Thread[]
+        output : List[Thread]
             the array.
         """
+
     @overload
     @staticmethod
-    def makeArray(self, multiple: double) -> Thread[]:
+    def makeArray(self, multiple: double) -> List[Thread]:
         """
         Returns a new array for threads. The length of the array is greater
         than zero and is proportional to the number of available processors
@@ -47,16 +48,17 @@ class Threads:
         
         Returns
         --------
-        output : Thread[]
+        output : List[Thread]
             the array, with length for at least one thread.
         """
+
     @staticmethod
-    def startAndJoin(self, threads: Thread[]) -> None:
+    def startAndJoin(self, threads: List[Thread]) -> None:
         """
         Starts and joins all threads in the specified array.
         
         Parameters
         -----------
-        threads : Thread[]
+        threads : List[Thread]
             array of threads.
         """

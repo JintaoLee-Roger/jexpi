@@ -12,3 +12,16 @@ git clone https://github.com/JintaoLee-Roger/jexpi.git
 # install via pip
 pip install -e .
 ```
+
+
+### Screen snapshots
+
+**Method**
+![example1](assets/ex1.png)
+
+**Static Method**
+![example2](assets/ex2.png)
+
+
+**Class**
+![example3](assets/ex3.png)

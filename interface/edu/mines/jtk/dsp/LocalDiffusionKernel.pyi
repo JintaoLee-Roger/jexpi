@@ -1,7 +1,7 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
 from edu.mines.jtk.util import *
-from edu.mines.jtk.dsp import *
+from edu.mines.jtk.dsp import Tensors3, Tensors2
 
 class LocalDiffusionKernel:
     """

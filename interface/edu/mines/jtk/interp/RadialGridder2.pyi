@@ -1,5 +1,7 @@
 from typing import overload
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.interp import RadialInterpolator2
+from edu.mines.jtk.dsp import Sampling
 
 
 class RadialGridder2:

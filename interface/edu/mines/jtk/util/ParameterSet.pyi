@@ -1,6 +1,6 @@
-
-from typing import overload
+from typing import overload, List
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.util import *
 
 
 class ParameterSet:
@@ -15,6 +15,7 @@ class ParameterSet:
         """
         Construct an empty nameless root parameter set.
         """
+
     @overload
     def __init__(self, name: String) -> None:
         """
@@ -25,6 +26,7 @@ class ParameterSet:
         name : String
             parameter set name.
         """
+
     def clone(self) -> Object:
         """
         Clone this parameter set.
@@ -34,6 +36,7 @@ class ParameterSet:
         output : Object
             a clone of this parameter set.
         """
+
     def replaceWith(self, parset: ParameterSet) -> ParameterSet:
         """
         Replace the contents of this parameter set with a copy of
@@ -51,6 +54,7 @@ class ParameterSet:
         output : ParameterSet
             this parameter set, with contents replaced.
         """
+
     def getName(self) -> String:
         """
         Get the parameter set name.
@@ -59,6 +63,7 @@ class ParameterSet:
         output : String
             parameter set name.
         """
+
     def setName(self, name: String) -> None:
         """
         Set the parameter set name.
@@ -69,6 +74,7 @@ class ParameterSet:
         name : String
             parameter set name.
         """
+
     def getParameter(self, name: String) -> Parameter:
         """
         Get a parameter.
@@ -84,6 +90,7 @@ class ParameterSet:
         output : Parameter
             parameter; null, if the parameter set does not contain a
         """
+
     def getParameterSet(self, name: String) -> ParameterSet:
         """
         Get a parameter subset.
@@ -99,6 +106,7 @@ class ParameterSet:
         output : ParameterSet
             subset; null, if the parameter set does not contain a
         """
+
     def addParameter(self, name: String) -> Parameter:
         """
         Add a new parameter to this parameter set.
@@ -116,6 +124,7 @@ class ParameterSet:
         output : Parameter
             parameter; null, if name is null.
         """
+
     def addParameterSet(self, name: String) -> ParameterSet:
         """
         Add a new parameter subset to this parameter set.
@@ -133,6 +142,7 @@ class ParameterSet:
         output : ParameterSet
             parameter subset; null, if name is null.
         """
+
     def getBoolean(self, name: String, defaultValue: bool) -> bool:
         """
         Get the boolean value of a named parameter in this parameter set.
@@ -151,6 +161,7 @@ class ParameterSet:
         output : bool
             parameter value or default value.
         """
+
     def getInt(self, name: String, defaultValue: int) -> int:
         """
         Get the int value of a named parameter in this parameter set.
@@ -169,6 +180,7 @@ class ParameterSet:
         output : int
             parameter value or default value.
         """
+
     def getLong(self, name: String, defaultValue: long) -> long:
         """
         Get the long value of a named parameter in this parameter set.
@@ -187,6 +199,7 @@ class ParameterSet:
         output : long
             parameter value or default value.
         """
+
     def getFloat(self, name: String, defaultValue: float) -> float:
         """
         Get the float value of a named parameter in this parameter set.
@@ -205,6 +218,7 @@ class ParameterSet:
         output : float
             parameter value or default value.
         """
+
     def getDouble(self, name: String, defaultValue: double) -> double:
         """
         Get the double value of a named parameter in this parameter set.
@@ -223,6 +237,7 @@ class ParameterSet:
         output : double
             parameter value or default value.
         """
+
     def getString(self, name: String, defaultValue: String) -> String:
         """
         Get the String value of a named parameter in this parameter set.
@@ -241,7 +256,9 @@ class ParameterSet:
         output : String
             parameter value or default value.
         """
-    def getBooleans(self, name: String, defaultValues: boolean[]) -> boolean[]:
+
+    def getBooleans(self, name: String,
+                    defaultValues: List[bool]) -> List[bool]:
         """
         Get the boolean values of a named parameter in this parameter set.
         does not contain a parameter with the specified name.
@@ -251,14 +268,15 @@ class ParameterSet:
         -----------
         name : String
             name of the parameter.
-        defaultValues : boolean[]
+        defaultValues : List[bool]
             default values returned if this parameter set
         
         Returns
         --------
-        output : boolean[]
+        output : List[bool]
             parameter values or default values.
         """
+
     def getInts(self, name: String, defaultValues: Int1D) -> Int1D:
         """
         Get the int values of a named parameter in this parameter set.
@@ -277,6 +295,7 @@ class ParameterSet:
         output : Int1D
             parameter values or default values.
         """
+
     def getLongs(self, name: String, defaultValues: Long1D) -> Long1D:
         """
         Get the long values of a named parameter in this parameter set.
@@ -295,6 +314,7 @@ class ParameterSet:
         output : Long1D
             parameter values or default values.
         """
+
     def getFloats(self, name: String, defaultValues: Float1D) -> Float1D:
         """
         Get the float values of a named parameter in this parameter set.
@@ -313,6 +333,7 @@ class ParameterSet:
         output : Float1D
             parameter values or default values.
         """
+
     def getDoubles(self, name: String, defaultValues: Double1D) -> Double1D:
         """
         Get the double values of a named parameter in this parameter set.
@@ -331,7 +352,8 @@ class ParameterSet:
         output : Double1D
             parameter values or default values.
         """
-    def getStrings(self, name: String, defaultValues: String1D) -> String1D:
+
+    def getStrings(self, name: String, defaultValues: List[str]) -> List[str]:
         """
         Get the String values of a named parameter in this parameter set.
         does not contain a parameter with the specified name.
@@ -341,14 +363,15 @@ class ParameterSet:
         -----------
         name : String
             name of the parameter.
-        defaultValues : String1D
+        defaultValues : List[str]
             default values returned if this parameter set
         
         Returns
         --------
-        output : String1D
+        output : List[str]
             parameter values or default values.
         """
+
     def getUnits(self, name: String, defaultUnits: String) -> String:
         """
         Get the units of a named parameter in this parameter set.
@@ -366,6 +389,7 @@ class ParameterSet:
         output : String
             parameter units or default units.
         """
+
     def setBoolean(self, name: String, value: bool) -> None:
         """
         Set the boolean value of a named parameter in this parameter set.
@@ -379,6 +403,7 @@ class ParameterSet:
         value : bool
             parameter value.
         """
+
     def setInt(self, name: String, value: int) -> None:
         """
         Set the int value of a named parameter in this parameter set.
@@ -392,6 +417,7 @@ class ParameterSet:
         value : int
             parameter value.
         """
+
     def setLong(self, name: String, value: long) -> None:
         """
         Set the long value of a named parameter in this parameter set.
@@ -405,6 +431,7 @@ class ParameterSet:
         value : long
             parameter value.
         """
+
     def setFloat(self, name: String, value: float) -> None:
         """
         Set the float value of a named parameter in this parameter set.
@@ -418,6 +445,7 @@ class ParameterSet:
         value : float
             parameter value.
         """
+
     def setDouble(self, name: String, value: double) -> None:
         """
         Set the double value of a named parameter in this parameter set.
@@ -431,6 +459,7 @@ class ParameterSet:
         value : double
             parameter value.
         """
+
     def setString(self, name: String, value: String) -> None:
         """
         Set the String value of a named parameter in this parameter set.
@@ -444,7 +473,8 @@ class ParameterSet:
         value : String
             parameter value.
         """
-    def setBooleans(self, name: String, values: boolean[]) -> None:
+
+    def setBooleans(self, name: String, values: List[bool]) -> None:
         """
         Set the boolean values of a named parameter in this parameter set.
         If this parameter set does not contain the named parameter, add
@@ -454,9 +484,10 @@ class ParameterSet:
         -----------
         name : String
             name of the parameter.
-        values : boolean[]
+        values : List[bool]
             parameter values.
         """
+
     def setInts(self, name: String, values: Int1D) -> None:
         """
         Set the int values of a named parameter in this parameter set.
@@ -470,6 +501,7 @@ class ParameterSet:
         values : Int1D
             parameter values.
         """
+
     def setLongs(self, name: String, values: Long1D) -> None:
         """
         Set the long values of a named parameter in this parameter set.
@@ -483,6 +515,7 @@ class ParameterSet:
         values : Long1D
             parameter values.
         """
+
     def setFloats(self, name: String, values: Float1D) -> None:
         """
         Set the float values of a named parameter in this parameter set.
@@ -496,6 +529,7 @@ class ParameterSet:
         values : Float1D
             parameter values.
         """
+
     def setDoubles(self, name: String, values: Double1D) -> None:
         """
         Set the double values of a named parameter in this parameter set.
@@ -509,7 +543,8 @@ class ParameterSet:
         values : Double1D
             parameter values.
         """
-    def setStrings(self, name: String, values: String1D) -> None:
+
+    def setStrings(self, name: String, values: List[str]) -> None:
         """
         Set the String values of a named parameter in this parameter set.
         If this parameter set does not contain the named parameter, add
@@ -519,9 +554,10 @@ class ParameterSet:
         -----------
         name : String
             name of the parameter.
-        values : String1D
+        values : List[str]
             parameter values.
         """
+
     def setUnits(self, name: String, units: String) -> None:
         """
         Set the units of a named parameter in this parameter set.
@@ -535,6 +571,7 @@ class ParameterSet:
         units : String
             parameter units.
         """
+
     @overload
     def copyTo(self, parent: ParameterSet) -> ParameterSet:
         """
@@ -553,6 +590,7 @@ class ParameterSet:
         output : ParameterSet
             the destination parameter set.
         """
+
     @overload
     def copyTo(self, parent: ParameterSet, name: String) -> ParameterSet:
         """
@@ -573,6 +611,7 @@ class ParameterSet:
         output : ParameterSet
             the destination parameter set.
         """
+
     @overload
     def moveTo(self, parent: ParameterSet) -> ParameterSet:
         """
@@ -591,6 +630,7 @@ class ParameterSet:
         output : ParameterSet
             the destination parameter set.
         """
+
     @overload
     def moveTo(self, parent: ParameterSet, name: String) -> ParameterSet:
         """
@@ -612,6 +652,7 @@ class ParameterSet:
         output : ParameterSet
             the destination parameter set.
         """
+
     @overload
     def remove(self) -> None:
         """
@@ -619,6 +660,7 @@ class ParameterSet:
         In other words, orphan this parameter set.
         If this parameter set is already an orphan, do nothing.
         """
+
     @overload
     def remove(self, name: String) -> None:
         """
@@ -631,6 +673,7 @@ class ParameterSet:
         name : String
             name of the parameter or subset to remove.
         """
+
     def countParameters(self) -> int:
         """
         Count the parameters in this parameter set.
@@ -639,6 +682,7 @@ class ParameterSet:
         output : int
             number of parameters in this parameter set.
         """
+
     def countParameterSets(self) -> int:
         """
         Count the parameter subsets in this parameter set.
@@ -647,11 +691,13 @@ class ParameterSet:
         output : int
             number of subsets in this parameter set.
         """
+
     def clear(self) -> None:
         """
         Clear this parameter set by removing all its parameters
         and parameter subsets.
         """
+
     def getParent(self) -> ParameterSet:
         """
         Get the parameter set that contains this parameter set.
@@ -662,6 +708,7 @@ class ParameterSet:
         output : ParameterSet
             parent parameter set; null, if the parameter set is
         """
+
     def getParameters(self) -> Iterator:
         """
         Gets an iterator for the parameters in this parameter set.
@@ -670,6 +717,7 @@ class ParameterSet:
         output : Iterator
             the iterator.
         """
+
     def getParameterSets(self) -> Iterator:
         """
         Gets an iterator for the parameter sets in this parameter set.
@@ -678,6 +726,7 @@ class ParameterSet:
         output : Iterator
             the iterator.
         """
+
     def fromString(self, s: String) -> None:
         """
         Replace this parameter set with that represented in the specified
@@ -689,6 +738,7 @@ class ParameterSet:
         s : String
             XML-formatted string representation of parameter set.
         """
+
     def toString(self) -> String:
         """
         Get a string representation of this parameter set.
@@ -699,6 +749,7 @@ class ParameterSet:
         output : String
             string representation of this parameter set.
         """
+
     def equals(self, o: Object) -> bool:
         """
         Compares two parameter sets for equality.
@@ -709,6 +760,7 @@ class ParameterSet:
         output : bool
             true, if the parameter sets are equal; false, otherwise.
         """
+
     def hashCode(self) -> int:
         """
         Computes the hash code of this parameter set.
@@ -717,6 +769,7 @@ class ParameterSet:
         output : int
             the hash code.
         """
+
     def writeExternal(self, out: ObjectOutput) -> None:
         """
         Serializes this parameter set by writing its XML string
@@ -727,7 +780,8 @@ class ParameterSet:
         out : ObjectOutput
             the object output to which to write this parameter set.
         """
-    def readExternal(self, in: ObjectInput) -> None:
+
+    def readExternal(self, ins: ObjectInput) -> None:
         """
         Restores this parameter set by reading its XML string
         representation from the specified object input.

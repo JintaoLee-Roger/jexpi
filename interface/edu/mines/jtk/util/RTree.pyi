@@ -1,5 +1,5 @@
 
-from typing import overload
+from typing import overload, List
 from edu.mines.jtk.mapping import *
 
 
@@ -117,7 +117,7 @@ class RTree:
         output : bool
             true, if the object was added; false, otherwise.
         """
-    def addPacked(self, objects: Object[]) -> int:
+    def addPacked(self, objects: List[Object]) -> int:
         """
         Adds the specified objects to this tree, if not already present.
         This method packs the objects, which means that it adds them in a
@@ -131,7 +131,7 @@ class RTree:
         
         Parameters
         -----------
-        objects : Object[]
+        objects : List[Object]
             the objects.
         
         Returns
@@ -194,7 +194,7 @@ class RTree:
             the number of levels.
         """
     @overload
-    def findOverlapping(self, min: Float1D, max: Float1D) -> Object[]:
+    def findOverlapping(self, min: Float1D, max: Float1D) -> List[Object]:
         """
         Finds all objects with bounds that overlap the specified bounds.
         
@@ -207,11 +207,11 @@ class RTree:
         
         Returns
         --------
-        output : Object[]
+        output : List[Object]
             the array of objects found.
         """
     @overload
-    def findOverlapping(self, box: Box) -> Object[]:
+    def findOverlapping(self, box: Box) -> List[Object]:
         """
         Finds all objects with bounds that overlap the specified box.
         
@@ -222,10 +222,10 @@ class RTree:
         
         Returns
         --------
-        output : Object[]
+        output : List[Object]
             the array of objects found.
         """
-    def findInSphere(self, center: Float1D, radius: float) -> Object[]:
+    def findInSphere(self, center: Float1D, radius: float) -> List[Object]:
         """
         Finds all objects in a specified sphere. An object is considered
         <em>in</em> the sphere if the distance from the sphere's center to
@@ -241,7 +241,7 @@ class RTree:
         
         Returns
         --------
-        output : Object[]
+        output : List[Object]
             the array of objects found.
         """
     @overload
@@ -260,7 +260,7 @@ class RTree:
             the nearest object; null, if this tree is empty.
         """
     @overload
-    def findNearest(self, k: int, point: Float1D) -> Object[]:
+    def findNearest(self, k: int, point: Float1D) -> List[Object]:
         """
         Finds the k objects nearest to the specified point.
         
@@ -273,7 +273,7 @@ class RTree:
         
         Returns
         --------
-        output : Object[]
+        output : List[Object]
             the array of objects, ordered by increasing distance to the point.
         """
     def getLeafArea(self) -> float:

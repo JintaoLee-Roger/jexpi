@@ -1,5 +1,8 @@
-from typing import overload
+from typing import overload, List
+from java.awt import Color
+from java.awt.image import IndexColorModel
 from edu.mines.jtk.mapping import *
+from edu.mines.jtk.awt import ColorMapListener
 
 
 class ColorMap:
@@ -51,7 +54,7 @@ class ColorMap:
         """
 
     @overload
-    def __init__(self, vmin: double, vmax: double, c: Color1D) -> None:
+    def __init__(self, vmin: double, vmax: double, c: List[Color]) -> None:
         """
         Constructs a color map for specified values and colors.
         The default value range is [0.0,1.0].
@@ -62,7 +65,7 @@ class ColorMap:
             the minimum value.
         vmax : double
             the maximum value.
-        c : Color1D
+        c : List[Color]
             array[256] of colors.
         """
 
@@ -654,13 +657,13 @@ class ColorMap:
         """
 
     @staticmethod
-    def makeIndexColorModel(self, c: Color1D) -> IndexColorModel:
+    def makeIndexColorModel(self, c: List[Color]) -> IndexColorModel:
         """
         Returns an index color model for the specified array of 256 colors.
         
         Parameters
         -----------
-        c : Color1D
+        c : List[Color]
             array[256] of colors.
         
         Returns

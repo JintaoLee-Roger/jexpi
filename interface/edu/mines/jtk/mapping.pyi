@@ -5,6 +5,7 @@ Float1D = ArrayLike
 Float2D = ArrayLike
 Float3D = ArrayLike
 Float4D = ArrayLike
+Float5D = ArrayLike
 
 Double1D = ArrayLike
 Double2D = ArrayLike
@@ -35,6 +36,11 @@ Char1D = ArrayLike
 Char2D = ArrayLike
 Char3D = ArrayLike
 Char4D = ArrayLike
+
+Bool1D = ArrayLike
+Bool2D = ArrayLike
+Bool3D = ArrayLike
+Bool4D = ArrayLike
 
 String = str
 String1D = List[str]

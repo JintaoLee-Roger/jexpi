@@ -1,4 +1,5 @@
 from typing import overload
+from java.awt.image import IndexColorModel
 from edu.mines.jtk.mapping import *
 
 

@@ -1,3 +1,9 @@
+"""
+A scene graph for interactive 3-D graphics via OpenGL.
+
+Source: https://github.com/MinesJTK/jtk/tree/master/core/src/main/java/edu/mines/jtk/sgl
+"""
+
 from .SelectDragMode import *
 from .OrbitViewLighting import *
 from .DragContext import *
@@ -61,3 +67,6 @@ from .Tuple3 import *
 from .Dragable import *
 from .StateSet import *
 from .Annotation import *
+
+from java.lang import *
+from java.util import *
