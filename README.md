@@ -16,6 +16,9 @@ pip install -e .
 
 ### Screen snapshots
 
+
+##### VSCode
+
 **Method**
 ![example1](assets/ex1.png)
 
@@ -25,3 +28,17 @@ pip install -e .
 
 **Class**
 ![example3](assets/ex3.png)
+
+
+##### Vim
+
+**Method**
+![example1](assets/exvim2.png)
+
+**Static Method**
+![example2](assets/exvim3.png)
+
+
+**Class**
+![example3](assets/exvim1.png)
+
