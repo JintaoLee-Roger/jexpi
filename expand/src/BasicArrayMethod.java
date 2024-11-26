@@ -1,20 +1,6 @@
-/**
- * Copyright (c) 2021 Jintao Li. All rights reserved. University of Science and Technology of China
- * (USTC), Computational and Interpretation Group (CIG).
- * 
- * @author: Jintao Li
- * @version: 2024.02.20
- * 
- * @class: BasicArrayMethod (static)
- * @brief: A supplement (mean, std, concat, ...) of edu.mines.jtk.util.ArrayMath
- **/
-
-package model;
+package bsm;
 
 import static edu.mines.jtk.util.ArrayMath.*;
-import java.awt.Color;
-import java.awt.image.IndexColorModel;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -224,7 +210,6 @@ public class BasicArrayMethod {
      */
     public static float[] traceh(float[][] gx, int idx) {
         int n3 = gx.length;
-        int n2 = gx[0].length;
 
         float[] out = zerofloat(n3);
         for (int i3 = 0; i3 < n3; ++i3) {
@@ -235,7 +220,6 @@ public class BasicArrayMethod {
     }
     public static double[] traceh(double[][] gx, int idx) {
         int n3 = gx.length;
-        int n2 = gx[0].length;
 
         double[] out = zerodouble(n3);
         for (int i3 = 0; i3 < n3; ++i3) {
@@ -591,14 +575,14 @@ public class BasicArrayMethod {
         return zeroint(x[0][0].length, x[0].length, x.length);
     }
 
-    public static double[] float2double(float[] x) {
+    public static double[] asdouble(float[] x) {
         double[] out = zerodouble_like(x);
         for (int i = 0; i < x.length; i++) {
             out[i] = x[i];
         }
         return out;
     }
-    public static double[][] float2double(float[][] x) {
+    public static double[][] asdouble(float[][] x) {
         double[][] out = zerodouble_like(x);
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[0].length; j++) {
@@ -607,7 +591,7 @@ public class BasicArrayMethod {
         }
         return out;
     }
-    public static double[][][] float2double(float[][][] x) {
+    public static double[][][] asdouble(float[][][] x) {
         double[][][] out = zerodouble_like(x);
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[0].length; j++) {
@@ -619,14 +603,39 @@ public class BasicArrayMethod {
         return out;
     }
 
-    public static float[] double2float(double[] x) {
+    public static float[] asfloat(double[] x) {
         float[] out = zerofloat_like(x);
         for (int i = 0; i < x.length; i++) {
             out[i] = (float)x[i];
         }
         return out;
     }
-    public static float[][] double2float(double[][] x) {
+    public static float[] asfloat(int[] x) {
+        float[] out = zerofloat_like(x);
+        for (int i = 0; i < x.length; i++) {
+            out[i] = (float)x[i];
+        }
+        return out;
+    }
+    public static float[] asfloat(float[] x) {
+        return x;
+    }
+    public static float[] asfloat(short[] x) {
+        float[] out = new float[x.length];
+        for (int i = 0; i < x.length; i++) {
+            out[i] = (float)x[i];
+        }
+        return out;
+    }
+    public static float[] asfloat(byte[] x) {
+        float[] out = new float[x.length];
+        for (int i = 0; i < x.length; i++) {
+            out[i] = (float)x[i];
+        }
+        return out;
+    }
+
+    public static float[][] asfloat(double[][] x) {
         float[][] out = zerofloat_like(x);
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[0].length; j++) {
@@ -635,8 +644,83 @@ public class BasicArrayMethod {
         }
         return out;
     }
-    public static float[][][] double2float(double[][][] x) {
+
+    public static float[][] asfloat(int[][] x) {
+        float[][] out = zerofloat_like(x);
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                out[i][j] = (float)x[i][j];
+            }
+        }
+        return out;
+    }
+
+    public static float[][] asfloat(float[][] x) {
+        return x;
+    }
+
+    public static float[][] asfloat(short[][] x) {
+        float[][] out = new float[x.length][x[0].length];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                out[i][j] = (float)x[i][j];
+            }
+        }
+        return out;
+    }
+
+    public static float[][] asfloat(byte[][] x) {
+        float[][] out = new float[x.length][x[0].length];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                out[i][j] = (float)x[i][j];
+            }
+        }
+        return out;
+    }
+
+    public static float[][][] asfloat(double[][][] x) {
         float[][][] out = zerofloat_like(x);
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                for (int k = 0; k < x[0][0].length; k++) {
+                    out[i][j][k] = (float)x[i][j][k];
+                }
+            }
+        }
+        return out;
+    }
+
+    public static float[][][] asfloat(int[][][] x) {
+        float[][][] out = zerofloat_like(x);
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                for (int k = 0; k < x[0][0].length; k++) {
+                    out[i][j][k] = (float)x[i][j][k];
+                }
+            }
+        }
+        return out;
+    }
+
+    public static float[][][] asfloat(float[][][] x) {
+        return x;
+    }
+
+    public static float[][][] asfloat(short[][][] x) {
+        float[][][] out = new float[x.length][x[0].length][x[0][0].length];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                for (int k = 0; k < x[0][0].length; k++) {
+                    out[i][j][k] = (float)x[i][j][k];
+                }
+            }
+        }
+        return out;
+    }
+
+    public static float[][][] asfloat(byte[][][] x) {
+        float[][][] out = new float[x.length][x[0].length][x[0][0].length];
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[0].length; j++) {
                 for (int k = 0; k < x[0][0].length; k++) {
