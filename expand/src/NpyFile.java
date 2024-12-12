@@ -47,6 +47,19 @@ public class NpyFile implements Closeable {
         parseHeader();
     }
 
+    // 从输入流初始化
+    public NpyFile(InputStream inputStream) throws IOException {
+        this._ais = new ArrayInputStream(inputStream, ByteOrder.LITTLE_ENDIAN);
+        parseHeader();
+    }
+
+    // 从字节数组初始化
+    public NpyFile(byte[] data) throws IOException {
+        ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
+        this._ais = new ArrayInputStream(byteStream, ByteOrder.LITTLE_ENDIAN);
+        parseHeader();
+    }
+
     public String getDataType() {
         return _dtype;
     }
@@ -441,202 +454,372 @@ public class NpyFile implements Closeable {
 
     // TODO: u4, u8, i8?
 
+    public static void writeNpy(OutputStream outstream, int[] array) throws IOException {
+
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i4", new int[] { array.length });
+            aos.writeBytes(header);
+            aos.writeInts(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
+        // aos.close();
+    }
+
     public static void writeNpy(String outname, int[] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i4", new int[] { array.length });
-        aos.writeBytes(header);
-        aos.writeInts(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, int[][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i4", new int[] { array.length, array[0].length });
+            aos.writeBytes(header);
+            aos.writeInts(array);
+            aos.flush();
+            // aos.close();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, int[][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i4", new int[] { array.length, array[0].length });
-        aos.writeBytes(header);
-        aos.writeInts(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, int[][][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i4", new int[] { array.length, array[0].length, array[0][0].length });
+            aos.writeBytes(header);
+            aos.writeInts(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, int[][][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i4", new int[] { array.length, array[0].length, array[0][0].length });
-        aos.writeBytes(header);
-        aos.writeInts(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, float[] array, boolean half) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            if (half) {
+                byte[] header = constructNpyHeader("f2", new int[] { array.length });
+                aos.writeBytes(header);
+                short[] halfs = floats2halfs(array);
+                aos.writeShorts(halfs);
+            } else {
+                byte[] header = constructNpyHeader("f4", new int[] { array.length });
+                aos.writeBytes(header);
+                aos.writeFloats(array);
+            }
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, float[] array, boolean half) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        if (half) {
-            byte[] header = constructNpyHeader("f2", new int[] { array.length });
-            aos.writeBytes(header);
-            short[] halfs = floats2halfs(array);
-            aos.writeShorts(halfs);
-        } else {
-            byte[] header = constructNpyHeader("f4", new int[] { array.length });
-            aos.writeBytes(header);
-            aos.writeFloats(array);
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array, half);
         }
-        aos.close();
     }
 
     public static void writeNpy(String outname, float[] array) throws IOException {
         writeNpy(outname, array, false);
     }
 
+    public static void writeNpy(OutputStream outstream, float[][] array, boolean half) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            if (half) {
+                byte[] header = constructNpyHeader("f2", new int[] { array.length, array[0].length });
+                aos.writeBytes(header);
+                short[][] halfs = floats2halfs(array);
+                aos.writeShorts(halfs);
+            } else {
+                byte[] header = constructNpyHeader("f4", new int[] { array.length, array[0].length });
+                aos.writeBytes(header);
+                aos.writeFloats(array);
+            }
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
+    }
+
     public static void writeNpy(String outname, float[][] array, boolean half) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        if (half) {
-            byte[] header = constructNpyHeader("f2", new int[] { array.length, array[0].length });
-            aos.writeBytes(header);
-            short[][] halfs = floats2halfs(array);
-            aos.writeShorts(halfs);
-        } else {
-            byte[] header = constructNpyHeader("f4", new int[] { array.length, array[0].length });
-            aos.writeBytes(header);
-            aos.writeFloats(array);
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array, half);
         }
-        aos.close();
     }
 
     public static void writeNpy(String outname, float[][] array) throws IOException {
         writeNpy(outname, array, false);
     }
 
+    public static void writeNpy(OutputStream outstream, float[][][] array, boolean half) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            if (half) {
+                byte[] header = constructNpyHeader("f2",
+                        new int[] { array.length, array[0].length, array[0][0].length });
+                aos.writeBytes(header);
+                short[][][] halfs = floats2halfs(array);
+                aos.writeShorts(halfs);
+            } else {
+                byte[] header = constructNpyHeader("f4",
+                        new int[] { array.length, array[0].length, array[0][0].length });
+                aos.writeBytes(header);
+                aos.writeFloats(array);
+            }
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
+    }
+
     public static void writeNpy(String outname, float[][][] array, boolean half) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        if (half) {
-            byte[] header = constructNpyHeader("f2", new int[] { array.length, array[0].length, array[0][0].length });
-            aos.writeBytes(header);
-            short[][][] halfs = floats2halfs(array);
-            aos.writeShorts(halfs);
-        } else {
-            byte[] header = constructNpyHeader("f4", new int[] { array.length, array[0].length, array[0][0].length });
-            aos.writeBytes(header);
-            aos.writeFloats(array);
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array, half);
         }
-        aos.close();
     }
 
     public static void writeNpy(String outname, float[][][] array) throws IOException {
         writeNpy(outname, array, false);
     }
 
+    public static void writeNpy(OutputStream outstream, double[] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("f8", new int[] { array.length });
+            aos.writeBytes(header);
+            aos.writeDoubles(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
+    }
+
     public static void writeNpy(String outname, double[] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("f8", new int[] { array.length });
-        aos.writeBytes(header);
-        aos.writeDoubles(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, double[][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("f8", new int[] { array.length, array[0].length });
+            aos.writeBytes(header);
+            aos.writeDoubles(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, double[][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("f8", new int[] { array.length, array[0].length });
-        aos.writeBytes(header);
-        aos.writeDoubles(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, double[][][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("f8", new int[] { array.length, array[0].length, array[0][0].length });
+            aos.writeBytes(header);
+            aos.writeDoubles(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, double[][][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("f8", new int[] { array.length, array[0].length, array[0][0].length });
-        aos.writeBytes(header);
-        aos.writeDoubles(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, byte[] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i1", new int[] { array.length });
+            aos.writeBytes(header);
+            aos.writeBytes(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, byte[] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i1", new int[] { array.length });
-        aos.writeBytes(header);
-        aos.writeBytes(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, byte[][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i1", new int[] { array.length, array[0].length });
+            aos.writeBytes(header);
+            aos.writeBytes(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, byte[][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i1", new int[] { array.length, array[0].length });
-        aos.writeBytes(header);
-        aos.writeBytes(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, byte[][][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i1", new int[] { array.length, array[0].length, array[0][0].length });
+            aos.writeBytes(header);
+            aos.writeBytes(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, byte[][][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i1", new int[] { array.length, array[0].length, array[0][0].length });
-        aos.writeBytes(header);
-        aos.writeBytes(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, short[] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i2", new int[] { array.length });
+            aos.writeBytes(header);
+            aos.writeShorts(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, short[] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i2", new int[] { array.length });
-        aos.writeBytes(header);
-        aos.writeShorts(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, short[][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i2", new int[] { array.length, array[0].length });
+            aos.writeBytes(header);
+            aos.writeShorts(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, short[][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i2", new int[] { array.length, array[0].length });
-        aos.writeBytes(header);
-        aos.writeShorts(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
+    }
+
+    public static void writeNpy(OutputStream outstream, short[][][] array) throws IOException {
+        @SuppressWarnings("resource")
+        ArrayOutputStream aos = new ArrayOutputStream(outstream, ByteOrder.LITTLE_ENDIAN);
+        try {
+            byte[] header = constructNpyHeader("i2", new int[] { array.length, array[0].length, array[0][0].length });
+            aos.writeBytes(header);
+            aos.writeShorts(array);
+            aos.flush();
+        } finally {
+            // Do not call aos.close() to avoid closing the underlying stream
+        }
     }
 
     public static void writeNpy(String outname, short[][][] array) throws IOException {
         if (!outname.endsWith(".npy")) {
             outname += ".npy";
         }
-        ArrayOutputStream aos = new ArrayOutputStream(outname, ByteOrder.LITTLE_ENDIAN);
-        byte[] header = constructNpyHeader("i2", new int[] { array.length, array[0].length, array[0][0].length });
-        aos.writeBytes(header);
-        aos.writeShorts(array);
-        aos.close();
+        try (OutputStream outstream = new FileOutputStream(outname)) {
+            writeNpy(outstream, array);
+        }
     }
 
     @Override
@@ -652,7 +835,7 @@ public class NpyFile implements Closeable {
     private ByteOrder _bo; // byte-order
     private boolean _fortranOrder; // Whether or not it is a Fortran order, only support C order
     private int _dOffset; // Offset of the data in the file
-    private ArrayInputStream _ais; 
+    private ArrayInputStream _ais;
     private final byte[] _magic = new byte[] { (byte) 0x93, 'N', 'U', 'M', 'P', 'Y' };
 
     // Supported data types mapped to byte size
@@ -933,9 +1116,9 @@ public class NpyFile implements Closeable {
             bo = "|";
         }
         String descr = bo + dtype; // e.g., '<i4', '<f4'
-        // boolean fortranOrder = false; 
+        // boolean fortranOrder = false;
 
-        // shape, e.g.,  (3, 4) , (10, )
+        // shape, e.g., (3, 4) , (10, )
         StringBuilder shapeBuilder = new StringBuilder();
         shapeBuilder.append('(');
         for (int i = 0; i < shape.length; i++) {
@@ -954,7 +1137,8 @@ public class NpyFile implements Closeable {
                 descr,
                 shapeBuilder.toString());
 
-        // Ensure that the header length is a multiple of 64, padding with spaces to fulfill the requirement
+        // Ensure that the header length is a multiple of 64, padding with spaces to
+        // fulfill the requirement
         int headerLen = headerDict.length() + 10; // Magic number and header length bytes
         int padding = 64 - (headerLen % 64);
 

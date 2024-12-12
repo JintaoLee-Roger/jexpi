@@ -58,6 +58,50 @@ def process_name(name):
     return fileName
 
 
+def readNpy(name):
+    if isinstance(name, str):
+        npy = NpyFile(name)
+    elif isinstance(name, NpyFile):
+        npy = name
+    else:
+        raise Exception("Unknown data type: " + str(name))
+    dtype = npy.getDataType()
+    shape = list(npy.getShape())[::-1]
+    if dtype == 'f4':
+        img = zerofloat(*shape)
+    elif dtype == 'f8':
+        img = zerodouble(*shape)
+    elif dtype == 'i8':
+        img = zerolong(*shape)
+    elif dtype == 'i4':
+        img = zeroint(*shape)
+    elif dtype == 'i2':
+        img = zeroshort(*shape)
+    elif dtype == 'i1' or dtype == 'u1':
+        img = zerobyte(*shape)
+    elif dtype == 'f2':
+        img = zerofloat(*shape)
+    else:
+        raise Exception("Unknown data type: " + dtype)
+    npy.readNpy(img)
+    return img
+
+
+def readNpz(name):
+    if isinstance(name, str):
+        npz = NpzFile(name)
+    elif isinstance(name, NpzFile):
+        npz = name
+    else:
+        raise Exception("Unknown data type: " + str(name))
+
+    npyfiles = npz.readNpz()
+    out = {}
+    for key in npyfiles.keySet():
+        out[key] = readNpy(npyfiles.get(key))
+    return out
+
+
 def readImage1D(name, n, bo='<'):
     """ 
     Reads an image from a file with specified dimemsions.
